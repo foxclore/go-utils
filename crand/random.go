@@ -1,7 +1,7 @@
 package crand
 
 import (
-	urand "github.com/foxclore/go-utils/v1/rand"
+	urand "github.com/foxclore/go-utils/rand"
 	"math"
 	"math/big"
 	mrand "math/rand"
