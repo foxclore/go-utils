@@ -5,7 +5,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func AuthFunc(c *gin.Context, cookieName string) (bool, string) {
+var cookieName = ""
+
+func SetCookieName(cookie string) {
+	cookieName = cookie
+}
+
+func AuthFunc(c *gin.Context) (bool, string) {
 	if cookie, err := c.Cookie(cookieName); err != nil {
 		return false, ""
 	} else {
