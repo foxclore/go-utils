@@ -2,7 +2,7 @@ package rand__test
 
 import (
 	"fmt"
-	"github.com/foxclore/go-utils/v1/crand"
+	"github.com/foxclore/go-utils/crand"
 	"testing"
 )
 
