@@ -13,23 +13,14 @@ import (
 	"time"
 )
 
-var (
-	uri = ""
-)
-
 // DBClient has Mutex to provide access for multiple goroutines
 type DBClient struct {
 	Mutex  sync.Mutex
 	Client *mongo.Client
 }
 
-// Init sets default URI for mongo
-func Init(mongoURI string) {
-	uri = mongoURI
-}
-
 // NewClient returns new client, connected to database
-func NewClient() *DBClient {
+func NewClient(uri string) *DBClient {
 	client, err := mongo.NewClient(options.Client().ApplyURI(uri))
 	if err != nil {
 		log.Panicln(err)
