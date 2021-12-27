@@ -1,3 +1,3 @@
-module github.com/foxclore/go-utils/v1
+module github.com/foxclore/go-utils
 
 go 1.17
