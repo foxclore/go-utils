@@ -31,10 +31,11 @@ func NewClient(uri string) *DBClient {
 	if err != nil {
 		log.Panicln(err)
 	}
-	var dbc DBClient
-	dbc.Mutex.Lock()
-	dbc.Client = client
-	dbc.Mutex.Unlock()
+	var dbc = DBClient{
+		Mutex:  sync.Mutex{},
+		Client: client,
+	}
+
 	return &dbc
 }
 
