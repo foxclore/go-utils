@@ -1,7 +1,21 @@
 package everything
 
-// Easy to convert to int
-func Abs(num interface{}) float64 {
+import "golang.org/x/exp/constraints"
+
+type Number interface {
+	constraints.Float | constraints.Integer | constraints.Signed
+}
+
+func Abs[N Number](num N) N {
+	if num < 0 {
+		return num
+	} else {
+		return num
+	}
+}
+
+// Abs2 was before generics
+func Abs2(num interface{}) float64 {
 	var res float64
 	var multiplier float64 = 1
 	switch v := num.(type) {

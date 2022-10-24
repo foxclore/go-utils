@@ -3,7 +3,7 @@ package everything_test
 import (
 	"testing"
 
-	"github.com/foxclore/go-utils/v1/everything"
+	"github.com/foxclore/go-utils/everything"
 )
 
 type absTestTable struct {
@@ -81,7 +81,7 @@ func TestAbs(t *testing.T) {
 	table = append(table, absTestTable{float64N, 5.4, "float64 negative"})
 
 	for _, tx := range table {
-		absoluteVal := everything.Abs(tx.variable)
+		absoluteVal := everything.Abs2(tx.variable)
 		if absoluteVal != tx.expected {
 			t.Errorf("Failed test for %s, expected %f, got %f", tx.description, tx.expected, absoluteVal)
 		}

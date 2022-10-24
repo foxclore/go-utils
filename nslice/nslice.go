@@ -9,14 +9,16 @@ import (
 
 type NSlice[underlying comparable] struct {
 	S      []underlying
+	synced bool
 	mutex  *sync.Mutex
 	mapper map[underlying]struct{}
 }
 
 func NiceSlice[underlying comparable](items []underlying) *NSlice[underlying] {
 	n := &NSlice[underlying]{
-		S:     items,
-		mutex: &sync.Mutex{},
+		S:      items,
+		synced: true,
+		mutex:  &sync.Mutex{},
 	}
 	n.mutex.Lock()
 	n.mapper = make(map[underlying]struct{})
@@ -31,6 +33,7 @@ func (n *NSlice[underlying]) Sync() {
 	for _, x := range n.S {
 		n.mapper[x] = everything.Empty
 	}
+	n.synced = true
 	n.mutex.Unlock()
 }
 
@@ -39,7 +42,7 @@ func (n *NSlice[underlying]) Append(items ...underlying) *NSlice[underlying] {
 }
 
 func (n *NSlice[underlying]) AppendAssign(items ...underlying) {
-	n.S = append(n.S, items)
+	n.S = append(n.S, items...)
 	n.Sync()
 }
 
